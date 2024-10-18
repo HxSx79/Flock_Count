@@ -18,10 +18,10 @@ cv2.setMouseCallback('RGB', RGB)
 model = YOLO("best.pt")
 
 # Export the model
-model.export(format="engine")  # creates 'yolov11.engine'
+# model.export(format="engine")  # creates 'yolov11.engine'
 
 # Load the exported TensorRT model
-trt_model = YOLO("best.engine")
+# trt_model = YOLO("best.engine")
 
 my_file = open("coco.txt", "r")
 data = my_file.read()
@@ -52,7 +52,7 @@ while True:
     frame = cv2.resize(frame, (480, 856))
 
     # Run YOLO11 tracking on the frame, persisting tracks between frames
-    results = trt_model.track(frame, persist=True,conf=0.5)
+    results = model.track(frame, persist=True,conf=0.5)
 
     # Check if there are any boxes in the results
     if results[0].boxes is not None and results[0].boxes.id is not None:
